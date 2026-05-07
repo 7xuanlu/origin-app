@@ -8,6 +8,14 @@ use origin_types::sources::{RawDocument, SourceStatus};
 use std::any::Any;
 
 /// Trait that all data source connectors must implement.
+///
+/// Intentionally duplicated from
+/// `7xuanlu/origin: crates/origin-core/src/sources/mod.rs`. origin-app has
+/// no origin-core dependency (Phase 5-D PR2 dropped it for license + bloat
+/// reasons), so the trait declaration is mirrored here with `AppError` in
+/// place of `OriginError`. The shared data shapes (`RawDocument`,
+/// `SourceStatus`) live in origin-types so connectors can move freely
+/// between crates.
 #[async_trait]
 pub trait DataSource: Send + Sync {
     /// Unique name for this source ("gmail", "notion", etc.)
